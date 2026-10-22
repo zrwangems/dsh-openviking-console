@@ -3,6 +3,26 @@
   "version": "0.1.0",
   "description": "OpenViking Studio console panel for DeepSeek Harness (preview)",
   "license": "AGPL-3.0-only",
+  "author": "zrwangems",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zrwangems/dsh-openviking-console.git"
+  },
+  "homepage": "https://github.com/zrwangems/dsh-openviking-console#readme",
+  "bugs": {
+    "url": "https://github.com/zrwangems/dsh-openviking-console/issues"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "openviking",
+    "console",
+    "plugin",
+    "bundle"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "type": "module",
   "main": "index.mjs",
   "icon": "./icon.svg",
@@ -21,6 +41,8 @@
     "locale/",
     "icon.svg",
     "README.md",
+    "README.en.md",
+    "docs/architecture.png",
     "LICENSE"
   ],
   "dsh": {
