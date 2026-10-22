@@ -1,0 +1,5 @@
+# The console half of the integration proposed in volcengine/OpenViking#6435.
+# One Host row: the fenced status route + same-origin Studio proxy.
+- insert:
+    - id: openviking-console
+      name: 'dsh-openviking-console'
