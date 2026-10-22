@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OpenViking 控制台",
+    "description": "在 DSH 左侧栏打开 OpenViking Studio：在 DSH 内嵌入服务端 Web 控制台，并跟随宿主主题（预览插件）。"
+  }
+}
