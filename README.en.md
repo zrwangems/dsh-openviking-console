@@ -1,12 +1,14 @@
-# OpenViking Console for DeepSeek Harness (preview)
+# OpenViking Console for DeepSeek Harness
 
 [简体中文](README.md) | **English**
 
 [![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
 
-An OpenViking Studio panel embedded in DSH: the left sidebar gets an **OpenViking** entry; clicking it opens the server's Web console in DSH's center column, with refresh / open-in-browser controls floating over it. This is a **standalone preview** of the console component proposed in [volcengine/OpenViking#6435](https://github.com/volcengine/OpenViking/pull/6435). Once that PR merges, use the memory plugin's built-in console and remove this preview.
+An OpenViking Studio panel embedded in DSH: the left sidebar gets an **OpenViking** entry; clicking it opens the server's Web console in DSH's center column, with refresh / open-in-browser controls floating over it.
 
-> **Do not install both at the same time.** They register the same `/openviking/console` and `/studio/*` routes and the same `openviking-console` sidebar entry.
+This is an **independently developed** DSH plugin: it only provides a panel for the OpenViking server, is not part of any official OpenViking DSH plugin, and does not follow the official repository's release cadence.
+
+> The plugin claims the `/openviking/console` and `/studio/*` routes on the DSH origin and the `openviking-console` sidebar entry. Do not install another OpenViking panel plugin that registers the same routes on the same DSH.
 
 ![Architecture of the proposed integration](docs/architecture.png)
 
@@ -27,7 +29,7 @@ An OpenViking Studio panel embedded in DSH: the left sidebar gets an **OpenVikin
 
 ## Install
 
-### Option 1: npm package name (after publish, recommended)
+### Option 1: npm package name (recommended)
 
 In DSH's "Add plugin" dialog, enter the package name:
 
@@ -67,7 +69,7 @@ The bundle adds one Host row, `openviking-console`. Its defaults work for a loca
 
 `endpoint` is the Host-side OpenViking API base; the status route probes `${endpoint}/health`, the proxy falls back to it when `consoleUrl` is unset, and the injected Studio connection profile uses it as the API base. `consoleUrl` is the browser-facing console base (a base or a full `/studio/home` URL); it defaults to `endpoint` and can be set with `OPENVIKING_CONSOLE_URL`. The environment also accepts `OPENVIKING_URL` / `OPENVIKING_BASE_URL` for `endpoint`.
 
-If you also install `@openviking/dsh-memory-plugin`, its `openviking-memory-runtime` row has its own config; a custom `endpoint` should be mirrored on `openviking-console` if the two components should talk to the same server.
+The configuration lives on the `openviking-console` row. If another OpenViking plugin is installed on the same DSH, mirror a custom `endpoint` onto each component row.
 
 ## How it works
 
@@ -84,11 +86,11 @@ The Studio is same-origin with DSH through the proxy, so the browser half can re
 - The Studio authenticates with its own connection page when the deployment requires it.
 - The plugin claims the `/studio` path on the DSH origin (the Studio is built with that base).
 
-## Preview notes
+## Notes
 
-- This repository is a preview of [volcengine/OpenViking#6435](https://github.com/volcengine/OpenViking/pull/6435); the upstream integration has the console as a second Host component of `@openviking/dsh-memory-plugin`, so it ships with the memory plugin version.
+- This is an independently developed DSH plugin, published as the npm package `dsh-openviking-console`, and it versions on its own.
 - Managed or split deployments can point `consoleUrl` at a separate console host; the Studio's API still uses `endpoint`.
-- Once the upstream PR is released, uninstall this preview before upgrading the memory plugin.
+- Next: a read-only task monitor inside the same plugin (the server's task list, status, duration, result summary).
 
 ## License
 

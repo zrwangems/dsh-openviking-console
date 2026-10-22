@@ -1,12 +1,14 @@
-# OpenViking 控制台（DSH 预览版）
+# OpenViking 控制台（DSH 插件）
 
 [English](README.en.md) | **简体中文**
 
 [![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
 
-在 DSH 左侧栏加一个 **OpenViking** 入口，点开在 DSH 中间列直接嵌入 OpenViking 服务端的 Studio，右下角悬浮刷新/在浏览器打开。它是 [volcengine/OpenViking#6435](https://github.com/volcengine/OpenViking/pull/6435) 中控制台组件的独立预览版；PR 合并后请改用记忆插件内置的控制台并卸载本预览。
+在 DSH 左侧栏加一个 **OpenViking** 入口，点开在 DSH 中间列直接嵌入 OpenViking 服务端的 Studio，右下角悬浮刷新/在浏览器打开。
 
-> **不要和记忆插件内置的控制台同时安装。** 两者都会注册 `/openviking/console`、`/studio/*` 和 `openviking-console` 侧栏入口。
+这是一个**独立开发**的 DSH 插件：只面向 OpenViking 服务端提供面板能力，不属于任何官方 OpenViking DSH 插件的组成部分，也不跟随官方仓库的发布节奏。
+
+> 插件会占用 DSH 同源的 `/openviking/console`、`/studio/*` 路由和 `openviking-console` 侧栏入口；同一台 DSH 上请不要再装注册相同路由的 OpenViking 面板插件。
 
 ![架构图](docs/architecture.png)
 
@@ -27,7 +29,7 @@
 
 ## 安装
 
-### 方式一：npm 包名（发布后，推荐）
+### 方式一：npm 包名（推荐）
 
 在 DSH 的“添加插件”窗口输入框填包名：
 
@@ -67,7 +69,7 @@ dsh plugin install .
 
 `endpoint` 是 Host 侧 API 地址：状态路由探测 `${endpoint}/health`，代理在未设置 `consoleUrl` 时回退到它，注入进 Studio 的连接配置也用它。`consoleUrl` 是浏览器访问控制台的地址（可以是 base 或完整的 `/studio/home` URL），默认等于 `endpoint`，也可用 `OPENVIKING_CONSOLE_URL` 设置；`endpoint` 也可用 `OPENVIKING_URL`/`OPENVIKING_BASE_URL` 设置。
 
-如果同时装了 `@openviking/dsh-memory-plugin`，它的 `openviking-memory-runtime` 行有自己的配置；需要两个组件连同一个服务端时，把自定义的 `endpoint` 也配到 `openviking-console`。
+配置写在 `openviking-console` 组件行上；如果同一台 DSH 上还装了别的 OpenViking 插件，把自定义的 `endpoint` 分别配到各自的组件行。
 
 ## 工作原理
 
@@ -84,11 +86,11 @@ Studio 通过代理与 DSH 同源，浏览器半边能直接读到它的文档�
 - 服务端需要认证时，由 Studio 自己的连接页登录。
 - 插件占用 DSH 同源的 `/studio` 路径（Studio 构建时使用的 base）。
 
-## 预览说明
+## 说明
 
-- 本仓库是 [volcengine/OpenViking#6435](https://github.com/volcengine/OpenViking/pull/6435) 的预览；上游把控制台作为 `@openviking/dsh-memory-plugin` 的第二个 Host 组件，随记忆插件版本发布。
+- 这是一个独立开发的 DSH 插件，按 npm 包 `dsh-openviking-console` 发布，版本独立演进。
 - 托管/分离部署可以把 `consoleUrl` 指向独立控制台地址，Studio 的 API 仍走 `endpoint`。
-- 上游 PR 发布后，请先卸载本预览，再升级记忆插件。
+- 后续方向：在同一插件里加入只读的任务监控面板（服务端任务列表、状态、耗时、结果摘要）。
 
 ## 许可证
 
