@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OpenViking Console",
+    "description": "OpenViking Studio panel in DSH's left sidebar: opens the server's Web console inside DSH and follows the host theme (preview)."
+  }
+}
