@@ -1,6 +1,6 @@
 {
   "name": "dsh-openviking-console",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "OpenViking Studio console panel for DeepSeek Harness (preview)",
   "license": "AGPL-3.0-only",
   "author": "zrwangems",
